@@ -30,6 +30,10 @@ Route::group(['middleware' => "auth"], function () {
     Route::post('/store-book', 'BookController@storeBook')->name('storebook');
  });
 
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+Route::get('/callback/{provider}', 'SocialController@callback');
+// Route::get('login/github', 'Auth\LoginController@redirectToProvider');
+// Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback');
 
 
 // Route::group(['as' => "admin.", "prefix" => "admin", "namespace" => "Admin"], function () {
