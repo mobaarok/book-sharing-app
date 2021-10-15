@@ -21,11 +21,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/book', 'BookController@getBookList')->name('booklist');
+Route::get('/book/{slug}', 'BookController@getSingleBook')->name('singlebook');
 
-
-
-
-    Route::get('/donate', 'BookController@createBook')->name('createbook');
+Route::get('/donate', 'BookController@createBook')->name('createbook');
 Route::group(['middleware' => "auth"], function () {
     Route::post('/store-book', 'BookController@storeBook')->name('storebook');
  });

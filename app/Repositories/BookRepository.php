@@ -10,6 +10,11 @@ class BookRepository
         return Book::with('donor:id,name', 'category')->paginate(10);
     }
 
+    public function getSingleBook($slug)
+    {
+        return Book::where('slug', $slug)->with('donor:id,name', 'category')->first();
+    }
+
     public function storeBook($book)
     {
      return   Book::create([

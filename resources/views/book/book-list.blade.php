@@ -30,7 +30,7 @@
                                     </p>
                                     <p class="card-text">
                                      This book in   {{ $book->category->category_name }} . More,
-                                        <span> <a href="#"> See Details</a> </span>
+                                        <span> <a href="{{ route('singlebook', $book->slug) }}"> See Details</a> </span>
                                     </p>
                                     <div class="">
                                         <p class="text-center">

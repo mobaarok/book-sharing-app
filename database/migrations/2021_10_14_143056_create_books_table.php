@@ -16,6 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('book_name');
+            $table->string('slug');
             $table->integer('donor_user_id');
             $table->integer('category_id');
             $table->boolean('is_donated')->default(false);

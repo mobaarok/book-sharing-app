@@ -21,6 +21,12 @@ class BookController extends Controller
         return view('book.book-list', ['books' => $books]);
     }
 
+    public function getSingleBook($slug)
+    {
+        $book = $this->bookRepository->getSingleBook($slug);
+        return view('book.single-book', ['book' => $book]);
+    }
+
     public function createBook(CatalogRepository $categoryRepository)
     {
         if (Auth::check()) {
