@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\CatalogRepository;
 use App\Http\Requests\StoreBookRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateBookRequest;
+use App\Repositories\AreasRepository;
 use App\Repositories\BookRepository;
+use App\Repositories\CategoryRepository;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     protected $bookRepository;
-    public function __construct(BookRepository $bookRepository)
-    {
+    protected $categoryRepository;
+    protected $areasRepository;
+
+    public function __construct(
+        BookRepository $bookRepository,
+        CategoryRepository $categoryRepository,
+        AreasRepository $areasRepository
+    ) {
         $this->bookRepository = $bookRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->areasRepository = $areasRepository;
     }
 
     public function getBookList()
@@ -27,22 +37,37 @@ class BookController extends Controller
         return view('book.single-book', ['book' => $book]);
     }
 
-    public function createBook(CatalogRepository $categoryRepository)
+    public function createBook()
     {
-        if (Auth::check()) {
-            $category = $categoryRepository->getAllCategory();
-            $user = Auth::user();
-            return view('book.create-book', ['category' => $category, 'user' => $user]);
-        }
-        return redirect()->route('login')
-            ->withInput()
-            ->with('status', 'Please Login to donate Book or signup.');
+        $user = Auth::user();
+        $divisions = $this->areasRepository->getAllDivision();
+        $category = $this->categoryRepository->getAllCategory();
+
+        return view('book.create-book', [
+            'category' => $category,
+            'user' => $user,
+            'divisions' => $divisions
+        ]);
     }
 
     public function storeBook(StoreBookRequest $request, BookRepository $bookRepository)
     {
         $validated = $request->validated();
-        $res =  $bookRepository->storeBook($request);
+        $res = $bookRepository->storeBook($request);
         return redirect()->route('booklist');
+    }
+
+    public function editBook($slug)
+    {
+        $book = $this->bookRepository->getSingleBook($slug);
+        $this->authorize('update-book', $book);
+        $category = $this->categoryRepository->getAllCategory();
+        return view('book.edit-book', ['book' => $book, 'category' => $category]);
+    }
+
+    public function updateBook(UpdateBookRequest $request, $slug)
+    {
+        $this->bookRepository->updateBook($request, $slug);
+        return redirect()->route('home');
     }
 }

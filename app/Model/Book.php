@@ -11,7 +11,7 @@ class Book extends Model
 
     public function donor()
     {
-        return $this->belongsTo('App\User', 'donor_user_id');
+        return $this->belongsTo('App\User', 'user_id');
     }
 
     public function category()

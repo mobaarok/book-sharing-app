@@ -13,12 +13,12 @@ class BookTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ["book_name" => "Story Book One", "slug" => "story-book-one", "donor_user_id" => 1, "category_id" => 3],
-            ["book_name" => "Class One Guide", "slug" => "class-one-guide", "donor_user_id" => 1, "category_id" => 1],
-            ["book_name" => "Class Three Guide", "slug" => "class-three-book", "donor_user_id" => 1, "category_id" => 1],
-            ["book_name" => "Class 7 Guide", "slug" => "sevenb-bok", "donor_user_id" => 1, "category_id" => 1],
-            ["book_name" => "Advanced Programmnig", "slug" => "programming", "donor_user_id" => 1, "category_id" => 2],
-            ["book_name" => "Machine Learnig Bookk", "slug" => "machine-l", "donor_user_id" => 1, "category_id" => 2]
+            ["book_name" => "Story Book One", "slug" => "story-book-one", "user_id" => 1, "category_id" => 3, 'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198'],
+            ["book_name" => "Class One Guide", "slug" => "class-one-guide", "user_id" => 1, "category_id" => 1,'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198'],
+            ["book_name" => "Class Three Guide", "slug" => "class-three-book", "user_id" => 1, "category_id" => 1,'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198'],
+            ["book_name" => "Class 7 Guide", "slug" => "sevenb-bok", "user_id" => 1, "category_id" => 1, 'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198'],
+            ["book_name" => "Advanced Programmnig", "slug" => "programming", "user_id" => 1, "category_id" => 2, 'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198'],
+            ["book_name" => "Machine Learnig Bookk", "slug" => "machine-l", "user_id" => 1, "category_id" => 2,'donation_division' => 'chittagong', 'donation_district' => 'feni', 'donation_address' => 'mizan road', 'donation_contact_number' => '9901248198']
         ];
         Book::insert($data);
     }

@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
-            $table->enum('type', ['user', 'admin'])->default('user');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('address')->nullable();
             $table->string('profile_picture')->nullable();
             $table->rememberToken();

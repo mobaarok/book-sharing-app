@@ -36,15 +36,18 @@
                                         <p class="text-center">
                                             <a href="#" class="btn btn-primary">Get Book</a>
                                         </p>
+
+                                        @can('update-book', $book)
+                                        <!-- The Current User Can Update The Post -->
+                                        <button class="btn btn-danger">Edit</button>
+                                        @endcan
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @endforeach
 <!-- book end -->
-
-
-
                     </div>
                 </div>
             </div>

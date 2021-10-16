@@ -22,12 +22,21 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/book', 'BookController@getBookList')->name('booklist');
 Route::get('/book/{slug}', 'BookController@getSingleBook')->name('singlebook');
+Route::get('book/edit/{slug}', 'BookController@editBook')->name('editbook');
+Route::post('book/update/{slug}', 'BookController@updateBook')->name('updatebook');
 
-Route::get('/donate', 'BookController@createBook')->name('createbook');
+
 Route::group(['middleware' => "auth"], function () {
     Route::post('/store-book', 'BookController@storeBook')->name('storebook');
- });
+    Route::get('/donate', 'BookController@createBook')->name('createbook');
 
+});
+
+Route::get('get-district', 'HomeController@getDistrictByDivisionId')->name('getDistrictByDivisionId');
+
+
+
+Route::resource('category', 'CategoryController');
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 // Route::get('login/github', 'Auth\LoginController@redirectToProvider');

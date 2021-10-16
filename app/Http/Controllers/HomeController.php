@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\AreasRepository;
 use Illuminate\Http\Request;
+use App\Repositories\BookRepository;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -21,8 +24,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(BookRepository $bookRepository)
     {
-        return view('home');
+        $currentUser = Auth::user();
+        $books = $bookRepository->getBooksByCurrentUser($currentUser);
+        // dd($books);
+        return view('home', ['books' => $books]);
+    }
+
+    public function getDistrictByDivisionId(
+        Request $request,
+        AreasRepository $areasRepository
+        ) {
+        $districts = $areasRepository->getDistrictsByDivisionId($request->division_id);
+        return response()->json(["districts" => $districts], 200);
     }
 }
