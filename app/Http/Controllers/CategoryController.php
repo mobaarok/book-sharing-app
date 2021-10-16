@@ -8,14 +8,13 @@ use App\Repositories\CategoryRepository;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     protected $categoryRepository;
     public function __construct(CategoryRepository $categoryRepository)
     {
-        // to unathorize non-admin user to this controller, not unathorize the Cathegory Model, Only his controller;
-        $this->authorizeResource('isAdmin');
         $this->categoryRepository = $categoryRepository;
     }
 

@@ -9,14 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function index()
     {
-        $this->middleware('auth');
+        return view('index');
     }
 
     /**
@@ -24,12 +20,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(BookRepository $bookRepository)
+    public function dashboard(BookRepository $bookRepository)
     {
         $currentUser = Auth::user();
         $books = $bookRepository->getBooksByCurrentUser($currentUser);
-        // dd($books);
-        return view('home', ['books' => $books]);
+        return view('home', ['books' => $books, 'user' => $currentUser]);
     }
 
     public function getDistrictByDivisionId(
