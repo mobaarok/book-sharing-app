@@ -50,7 +50,8 @@
                                 <select name="division" id="division" class="form-control">
                                     <option selected value=" ">Choose...</option>
                                     @foreach($divisions as $division)
-                                    <option data-division_id="{{ $division->id}}" value="{{ $division->division_name }}"> {{ $division->division_name }}
+                                    <option data-division_id="{{ $division->id}}"
+                                        value="{{ $division->division_name }}"> {{ $division->division_name }}
                                     </option>
                                     @endforeach
                                 </select>
@@ -72,9 +73,9 @@
                                 <label for="donorAddress"> Donor Present Address</label>
                                 <input name="address" type="text" class="form-control" id="donorAddress"
                                     placeholder="1234 Main St">
-                                    @error('address')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                @error('address')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                         </div>
@@ -84,22 +85,22 @@
                                 <label for="donorName">Donated By</label>
                                 <input name="donor_name" type="text" class="form-control" id="donorName"
                                     value="{{$user->name}}">
-                                    @error('donor_name')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                @error('donor_name')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <input name="user_id" type="hidden" value="{{$user->id}}" hidden>
-@error('user_id')
-<div class="text-danger">{{ $message }}</div>
-@enderror
+                            @error('user_id')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
 
                             <div class="form-group col-md-6">
                                 <label for="donorContactNumber">Donor Contact Number: </label>
                                 <input name="contact_number" type="text" class="form-control" id="donorContactNumber"
                                     value="{{ $user->mobile }}">
-                                    @error('contact_number')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
+                                @error('contact_number')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group">

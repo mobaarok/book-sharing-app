@@ -13,7 +13,7 @@ class BookRepository
 
     public function getSingleBook($slug)
     {
-        return Book::where('slug', $slug)->with('donor:id,name', 'category')->first();
+        return Book::where('slug', $slug)->with('donor:id,name', 'category', 'wantedUser')->first();
     }
 
     public function storeBook($book)

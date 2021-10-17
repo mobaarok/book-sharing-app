@@ -34,6 +34,9 @@ Route::group(['middleware' => "auth"], function () {
     Route::resource('category', 'CategoryController')->middleware('can:isAdmin');
     // for donate page, to get district by division in donate form fillup
     Route::get('get-district', 'HomeController@getDistrictByDivisionId')->name('getDistrictByDivisionId');
+
+    Route::post('/book-want-request', 'BookDonationController@bookWantedRequest')->name('bookWantedRequest');
+
 });
 
 

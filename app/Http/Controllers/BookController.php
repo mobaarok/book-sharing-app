@@ -5,24 +5,29 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Repositories\AreasRepository;
+use App\Repositories\BookDonationRepository;
 use App\Repositories\BookRepository;
 use App\Repositories\CategoryRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     protected $bookRepository;
     protected $categoryRepository;
     protected $areasRepository;
+    protected $bookDonationRepo;
 
     public function __construct(
         BookRepository $bookRepository,
         CategoryRepository $categoryRepository,
-        AreasRepository $areasRepository
+        AreasRepository $areasRepository,
+        BookDonationRepository $bookDonationRepo
     ) {
         $this->bookRepository = $bookRepository;
         $this->categoryRepository = $categoryRepository;
         $this->areasRepository = $areasRepository;
+        $this->bookDonationRepo = $bookDonationRepo;
     }
 
     public function getBookList()
@@ -33,8 +38,15 @@ class BookController extends Controller
 
     public function getSingleBook($slug)
     {
+        $recevier_user = Auth::user();
         $book = $this->bookRepository->getSingleBook($slug);
-        return view('book.single-book', ['book' => $book]);
+         $isNotRequested  = $this->bookDonationRepo->checkIsNotRequested($recevier_user, $book);
+
+        return view('book.single-book', [
+            'book' => $book,
+            'recevier_user' => $recevier_user,
+            'isNotRequested' => $isNotRequested
+        ]);
     }
 
     public function createBook()

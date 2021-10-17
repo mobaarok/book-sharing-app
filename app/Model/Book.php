@@ -13,6 +13,11 @@ class Book extends Model
     {
         return $this->belongsTo('App\User', 'user_id');
     }
+    public function wantedUser()
+    {
+        return $this->belongsToMany('App\User', 'book_want_requests', 'book_id', 'receiver_user_id')
+        ->withPivot('receiver_need', 'receiver_address', 'receiver_contact_number', 'description');
+    }
 
     public function category()
     {
